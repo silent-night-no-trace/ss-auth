@@ -1,5 +1,5 @@
 ## 前言
-本项目是基于官方demo扩展的一个 用于学习理解authorization-server
+本项目是基于官方demo扩展的一个子项目 用于学习理解authorization-server
 
 ## 模块说明
 | 模板名                     | 说明                                 |
