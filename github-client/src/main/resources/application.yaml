@@ -1,0 +1,22 @@
+logging:
+  level:
+    org.springframework.security: trace
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: github-client
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            # 自己申请的 github client id 申请地址: https://github.com/settings/apps
+            # 主要注意配置的回调地址 http://localhost:port/login/oauth2/code/github
+            # 此项目的端口默认为8081 未改动情况 直接配置回调地址 http://localhost:8081/login/oauth2/code/github 即可
+            client-id: xxxx
+            # 自己申请的 github client secret
+            client-secret: xxxx
