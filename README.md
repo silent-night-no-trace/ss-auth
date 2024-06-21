@@ -15,29 +15,29 @@
 
 ### auth-server
 认证服务器 提供认证的服务
-com.style.auth.authentication 包下为 扩展的认证方式 这里是device-client授权
-com.style.auth.config.AuthorizationServerConfig auth-server核心配置类 
-com.style.auth.config.SecurityConfig Security的配置类
-com.style.auth.federation 包下为扩展 例如 认证成功后的处理器 AuthenticationSuccessHandler  OAuth2TokenCustomizer
-com.style.auth.jose 包为 ras的密钥生成工具
-com.style.auth.web 包为一些扩展的接口controller 例如 login接口 device认证相关接口 认证授权接口
-application.yaml 核心配置文件 配置了 github和google 登录授权的client的 相关信息需要自行申请
+- com.style.auth.authentication 包下为 扩展的认证方式 这里是device-client授权
+- com.style.auth.config.AuthorizationServerConfig auth-server核心配置类 
+- com.style.auth.config.SecurityConfig Security的配置类
+- com.style.auth.federation 包下为扩展 例如 认证成功后的处理器 AuthenticationSuccessHandler  OAuth2TokenCustomizer
+- com.style.auth.jose 包为 ras的密钥生成工具
+- com.style.auth.web 包为一些扩展的接口controller 例如 login接口 device认证相关接口 认证授权接口
+- application.yaml 核心配置文件 配置了 github和google 登录授权的client的 相关信息需要自行申请
 
 ### message-resource-server
 消息资源服务
-com.style.message.config.ResourceServerConfig 核心配置类 主要配置了 /messages/** 需要认证以及SCOPE_message.read 权限
+- com.style.message.config.ResourceServerConfig 核心配置类 主要配置了 /messages/** 需要认证以及SCOPE_message.read 权限
 
 ### user-resource-server
 用户消息资源服务
-com.style.user.config.ResourceServerConfig 核心配置类 主要配置了 /user/** 需要认证以及 SCOPE_user.read 权限
+- com.style.user.config.ResourceServerConfig 核心配置类 主要配置了 /user/** 需要认证以及 SCOPE_user.read 权限
 
 
 ### user-client
-可以理解为这是个组合页面  用来调试这几个认证模式 授权码 以及 客户端凭证 以及 token传递 (认证后,通过透传token信息,来访问其他的服务接口)
-com.style.client.authorization 包下 扩展的认证方式 这里是device-client的请求 以及认证(OAuth2AuthorizedClientProvider)
-com.style.client.config.SecurityConfig 核心配置类 
-com.style.client.config.WebClientConfig 主要用来配置webClient以及OAuth2AuthorizedClientManager
-com.style.client.web包 主要是一些认证的接口 AuthorizationController 以及用于 deviceClient认证的接口
+- 可以理解为这是个组合页面  用来调试这几个认证模式 授权码 以及 客户端凭证 以及 token传递 (认证后,通过透传token信息,来访问其他的服务接口)
+- com.style.client.authorization 包下 扩展的认证方式 这里是device-client的请求 以及认证(OAuth2AuthorizedClientProvider)
+- com.style.client.config.SecurityConfig 核心配置类 
+- com.style.client.config.WebClientConfig 主要用来配置webClient以及OAuth2AuthorizedClientManager
+- com.style.client.web包 主要是一些认证的接口 AuthorizationController 以及用于 deviceClient认证的接口
 
 
 ## 使用说明
