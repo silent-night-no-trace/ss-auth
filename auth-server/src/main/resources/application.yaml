@@ -1,0 +1,41 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: auth-server
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google-idp:
+            provider: google
+            # 填入自己申请的 google 客户端ID
+            client-id: xxx
+            # 填入自己申请的 google 客户端secret
+            client-secret: xxxx
+            # 直接使用默认的
+            #scope: openid, https://www.googleapis.com/auth/userinfo.profile, https://www.googleapis.com/auth/userinfo.email
+            client-name: Sign in with Google
+          github-idp:
+            provider: github
+            # 填入自己申请的 github 客户端ID
+            client-id: xxx
+            # 填入自己申请的 github 客户端secret
+            client-secret: xxxx
+            redirect-uri: http://localhost:9000/login/oauth2/code/github
+            scope: user:email, read:user
+            client-name: Sign in with GitHub
+        provider:
+          google:
+            user-name-attribute: email
+          github:
+            user-name-attribute: login
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: debug
+    org.springframework.security.oauth2: debug
