@@ -17,17 +17,15 @@ package com.style.auth.config;
 
 
 import com.style.auth.federation.FederatedIdentityAuthenticationSuccessHandler;
+import com.style.persistence.support.user.CustomUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
@@ -40,6 +38,12 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class SecurityConfig {
+
+	private final CustomUserDetailsServiceImpl detailsService;
+
+    public SecurityConfig(CustomUserDetailsServiceImpl detailsService) {
+        this.detailsService = detailsService;
+    }
 
     // @formatter:off
 	@Bean
@@ -59,7 +63,7 @@ public class SecurityConfig {
 					.loginPage("/login")
 					.successHandler(authenticationSuccessHandler())
 			)
-				.userDetailsService(detailsService());
+				.userDetailsService(detailsService);
 
 		return http.build();
 	}
@@ -68,28 +72,6 @@ public class SecurityConfig {
     private AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new FederatedIdentityAuthenticationSuccessHandler();
     }
-
-    // @formatter:off
-	private UserDetailsService detailsService() {
-		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-		manager.createUser(User.withUsername("admin")
-				.password("{bcrypt}$2a$10$3f85hV3x7ufL8m.4.lT6zeF2ggN8/oBSEPlMKowrP/gjctECbOBiy")
-				.roles("ADMIN")
-				.build());
-
-		manager.createUser(User.withUsername("user")
-				.password("{bcrypt}$2a$10$3f85hV3x7ufL8m.4.lT6zeF2ggN8/oBSEPlMKowrP/gjctECbOBiy")
-				.roles("USER")
-				.build());
-
-		manager.createUser(User.withUsername("guest")
-				.password("{bcrypt}$2a$10$3f85hV3x7ufL8m.4.lT6zeF2ggN8/oBSEPlMKowrP/gjctECbOBiy")
-				.roles("READ_INFO")
-				.build());
-		return manager;
-	}
-	// @formatter:on
-
 
     /**
      * 密码加解密工具

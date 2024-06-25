@@ -17,6 +17,7 @@
 
     <modules>
         <module>auth-server</module>
+        <module>auth-server-persistence</module>
         <module>message-resource-server</module>
         <module>user-resource-server</module>
         <module>github-client</module>
@@ -40,8 +41,6 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-
-
         </dependencies>
     </dependencyManagement>
 
